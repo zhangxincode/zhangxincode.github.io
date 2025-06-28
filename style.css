@@ -171,20 +171,17 @@ body {
     background: rgba(10, 10, 10, 0.8);
 }
 
-/* 导航栏样式 */
-.content-nav {
+/* 简单导航栏样式 */
+.simple-nav {
     background: rgba(0, 255, 255, 0.1);
     border: 1px solid rgba(0, 255, 255, 0.3);
-    border-radius: 15px;
+    border-radius: 12px;
     padding: 1rem;
     margin-bottom: 2rem;
     backdrop-filter: blur(10px);
-    position: sticky;
-    top: 1rem;
-    z-index: 100;
 }
 
-.nav-list {
+.nav-menu {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -194,7 +191,7 @@ body {
     flex-wrap: wrap;
 }
 
-.nav-link {
+.nav-item {
     color: #00ffff;
     text-decoration: none;
     font-family: 'Orbitron', monospace;
@@ -203,25 +200,9 @@ body {
     border-radius: 8px;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
 }
 
-.nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.nav-link:hover::before {
-    left: 100%;
-}
-
-.nav-link:hover {
+.nav-item:hover {
     background: rgba(0, 255, 255, 0.2);
     color: #ffffff;
     text-shadow: 0 0 10px #00ffff;
@@ -229,33 +210,13 @@ body {
     box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
 }
 
-.nav-link:active {
+.nav-item:active {
     transform: translateY(0);
-}
-
-.nav-link.active {
-    background: rgba(0, 255, 255, 0.3);
-    color: #ffffff;
-    text-shadow: 0 0 10px #00ffff;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-    border: 1px solid rgba(0, 255, 255, 0.5);
 }
 
 .page {
     max-width: 900px;
     margin: 0 auto;
-}
-
-.page-inner-wrap {
-    background: rgba(0, 255, 255, 0.05);
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    border-radius: 15px;
-    padding: 2rem;
-    backdrop-filter: blur(10px);
-}
-
-.page-content {
-    line-height: 1.8;
 }
 
 /* 章节样式 */
@@ -549,17 +510,6 @@ body {
     font-size: 0.9rem;
 }
 
-/* 锚点 */
-.anchor {
-    display: block;
-    position: relative;
-    top: -100px;
-    visibility: hidden;
-    height: 0;
-    margin: 0;
-    padding: 0;
-}
-
 /* 响应式设计 */
 @media (max-width: 768px) {
     .sidebar {
@@ -574,18 +524,16 @@ body {
         padding: 1rem;
     }
     
-    .content-nav {
-        position: relative;
-        top: 0;
+    .simple-nav {
         margin-bottom: 1rem;
     }
     
-    .nav-list {
+    .nav-menu {
         gap: 1rem;
         justify-content: space-around;
     }
     
-    .nav-link {
+    .nav-item {
         padding: 0.4rem 0.8rem;
         font-size: 0.9rem;
     }

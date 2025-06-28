@@ -89,6 +89,28 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// 简单导航栏功能
+document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
+            
+            if (target) {
+                // 平滑滚动到目标位置
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+
 // 滚动动画
 const observerOptions = {
     threshold: 0.1,
@@ -200,10 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.author-urls a').forEach(link => {
     link.addEventListener('mouseenter', function() {
         this.style.transform = 'translateX(5px)';
+        this.style.textShadow = '0 0 15px #00ffff';
     });
     
     link.addEventListener('mouseleave', function() {
         this.style.transform = 'translateX(0)';
+        this.style.textShadow = 'none';
     });
 });
 
@@ -305,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 粒子效果
 function createParticles() {
     const particlesContainer = document.createElement('div');
-    particlesContainer.className = 'particles-container';
+    particlesContainer.className = 'particles';
     particlesContainer.style.cssText = `
         position: fixed;
         top: 0;
@@ -313,9 +337,8 @@ function createParticles() {
         width: 100%;
         height: 100%;
         pointer-events: none;
-        z-index: 1;
+        z-index: -1;
     `;
-    
     document.body.appendChild(particlesContainer);
     
     for (let i = 0; i < 50; i++) {
@@ -324,20 +347,20 @@ function createParticles() {
             position: absolute;
             width: 2px;
             height: 2px;
-            background: rgba(0, 255, 255, 0.5);
+            background: #00ffff;
             border-radius: 50%;
             animation: float ${Math.random() * 10 + 10}s linear infinite;
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
+            opacity: ${Math.random() * 0.5 + 0.2};
         `;
-        
         particlesContainer.appendChild(particle);
     }
 }
 
-// 添加浮动动画
-const floatStyle = document.createElement('style');
-floatStyle.textContent = `
+// 添加粒子动画
+const particleStyle = document.createElement('style');
+particleStyle.textContent = `
     @keyframes float {
         0% {
             transform: translateY(100vh) rotate(0deg);
@@ -355,9 +378,7 @@ floatStyle.textContent = `
         }
     }
 `;
-document.head.appendChild(floatStyle);
+document.head.appendChild(particleStyle);
 
-// 页面加载完成后创建粒子效果
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(createParticles, 1000);
-}); 
+// 页面加载时创建粒子
+document.addEventListener('DOMContentLoaded', createParticles); 
