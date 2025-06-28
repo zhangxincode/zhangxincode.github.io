@@ -84,7 +84,7 @@ body {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: #f0f0f0;/*linear-gradient(45deg, #00ffff, #0080ff);*/
+    background: linear-gradient(45deg, #00ffff, #0080ff);
     display: flex;
     align-items: center;
     justify-content: center;
