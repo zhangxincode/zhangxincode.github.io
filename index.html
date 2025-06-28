@@ -20,7 +20,9 @@
             <div class="profile-box">
 
                 <div class="author-avatar">
-                    <img src="my_photo.jpg" alt="张鑫" class="avatar-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="images/my_photo.jpg" alt="张鑫" class="avatar-image" 
+                         onload="console.log('头像图片加载成功');" 
+                         onerror="console.error('头像图片加载失败:', this.src); this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="avatar-placeholder" style="display: none;">
                         <i class="fas fa-user"></i>
                     </div>
