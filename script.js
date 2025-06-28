@@ -1,31 +1,65 @@
-// 平滑滚动
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// 导航栏活动状态管理
+// 导航功能优化
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.section-block');
+    const anchors = document.querySelectorAll('.anchor');
+    
+    // 防抖函数
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // 立即跳转函数
+    function instantScrollTo(target) {
+        if (target) {
+            // 使用更简单的计算方法
+            const navHeight = 100; // 导航栏高度
+            const offsetTop = target.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: Math.max(0, offsetTop),
+                behavior: 'auto'
+            });
+        }
+    }
+    
+    // 为导航链接添加点击事件
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
+            
+            if (target) {
+                console.log('点击导航链接:', targetId, '目标元素:', target);
+                instantScrollTo(target);
+            } else {
+                console.error('未找到目标元素:', targetId);
+            }
+        });
+    });
     
     // 监听滚动事件，更新导航栏活动状态
-    window.addEventListener('scroll', () => {
+    const updateActiveNav = debounce(() => {
         let current = '';
+        const navHeight = 100;
+        const scrollPosition = window.scrollY + navHeight;
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
+        anchors.forEach(anchor => {
+            const anchorTop = anchor.offsetTop;
+            const anchorBottom = anchorTop + 200; // 给每个区域200px的高度
+            
+            if (scrollPosition >= anchorTop && scrollPosition < anchorBottom) {
+                current = anchor.getAttribute('id');
             }
         });
         
@@ -35,15 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
-    });
+    }, 10);
     
-    // 为导航链接添加点击效果
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+    window.addEventListener('scroll', updateActiveNav);
+    
+    // 页面加载时初始化活动状态
+    updateActiveNav();
 });
 
 // 导航栏滚动效果
@@ -208,116 +239,67 @@ document.querySelectorAll('.status').forEach(status => {
     });
 });
 
-// 页面加载动画
-window.addEventListener('load', () => {
+// 教育经历项动画
+document.querySelectorAll('.education-item').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+        const header = this.querySelector('.education-header');
+        if (header) {
+            header.style.transform = 'translateX(10px)';
+        }
+    });
+    
+    item.addEventListener('mouseleave', function() {
+        const header = this.querySelector('.education-header');
+        if (header) {
+            header.style.transform = 'translateX(0)';
+        }
+    });
+});
+
+// 获奖经历项动画
+document.querySelectorAll('.award-item').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+        const header = this.querySelector('.award-header');
+        if (header) {
+            header.style.transform = 'translateX(10px)';
+        }
+    });
+    
+    item.addEventListener('mouseleave', function() {
+        const header = this.querySelector('.award-header');
+        if (header) {
+            header.style.transform = 'translateX(0)';
+        }
+    });
+});
+
+// 页面加载完成后的初始化
+document.addEventListener('DOMContentLoaded', () => {
+    // 添加页面加载动画
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease';
     
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
-});
-
-// 滚动进度指示器
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset;
-    const docHeight = document.body.offsetHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
     
-    // 创建或更新进度条
-    let progressBar = document.querySelector('.scroll-progress');
-    if (!progressBar) {
-        progressBar = document.createElement('div');
-        progressBar.className = 'scroll-progress';
-        progressBar.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, #00ffff, #0080ff);
-            z-index: 10000;
-            transition: width 0.3s ease;
-        `;
-        document.body.appendChild(progressBar);
-    }
-    
-    progressBar.style.width = scrollPercent + '%';
-});
-
-// 键盘快捷键
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey || e.metaKey) {
-        switch(e.key) {
-            case '1':
-                e.preventDefault();
-                document.querySelector('#about-me').scrollIntoView({ behavior: 'smooth' });
-                break;
-            case '2':
-                e.preventDefault();
-                document.querySelector('#education').scrollIntoView({ behavior: 'smooth' });
-                break;
-            case '3':
-                e.preventDefault();
-                document.querySelector('#publications').scrollIntoView({ behavior: 'smooth' });
-                break;
-            case '4':
-                e.preventDefault();
-                document.querySelector('#awards').scrollIntoView({ behavior: 'smooth' });
-                break;
-        }
-    }
-});
-
-// 添加返回顶部按钮
-const backToTop = document.createElement('button');
-backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-backToTop.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 255, 255, 0.2);
-    border: 2px solid #00ffff;
-    border-radius: 50%;
-    color: #00ffff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-`;
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    // 初始化所有动画元素
+    const animatedElements = document.querySelectorAll('.section-block, .paper-box, .patent-item, .award-item, .education-item');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     });
-});
-
-backToTop.addEventListener('mouseenter', () => {
-    backToTop.style.background = 'rgba(0, 255, 255, 0.3)';
-    backToTop.style.transform = 'scale(1.1)';
-});
-
-backToTop.addEventListener('mouseleave', () => {
-    backToTop.style.background = 'rgba(0, 255, 255, 0.2)';
-    backToTop.style.transform = 'scale(1)';
-});
-
-document.body.appendChild(backToTop);
-
-// 显示/隐藏返回顶部按钮
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTop.style.opacity = '1';
-        backToTop.style.visibility = 'visible';
-    } else {
-        backToTop.style.opacity = '0';
-        backToTop.style.visibility = 'hidden';
-    }
+    
+    // 延迟显示动画元素
+    setTimeout(() => {
+        animatedElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 500);
 });
 
 // 粒子效果
@@ -331,24 +313,24 @@ function createParticles() {
         width: 100%;
         height: 100%;
         pointer-events: none;
-        z-index: -1;
+        z-index: 1;
     `;
     
     document.body.appendChild(particlesContainer);
     
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.style.cssText = `
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #00ffff;
+            background: rgba(0, 255, 255, 0.5);
             border-radius: 50%;
             animation: float ${Math.random() * 10 + 10}s linear infinite;
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
-            opacity: ${Math.random() * 0.5 + 0.3};
         `;
+        
         particlesContainer.appendChild(particle);
     }
 }
@@ -375,57 +357,7 @@ floatStyle.textContent = `
 `;
 document.head.appendChild(floatStyle);
 
-// 初始化粒子效果
-document.addEventListener('DOMContentLoaded', createParticles);
-
-// 添加CSS变量
-const cssVariables = document.createElement('style');
-cssVariables.textContent = `
-    :root {
-        --accent-color: #00ffff;
-        --secondary-color: #ff6b6b;
-        --background-color: #0a0a0a;
-        --text-color: #ffffff;
-    }
-`;
-document.head.appendChild(cssVariables);
-
-// 侧边栏滚动效果
-window.addEventListener('scroll', () => {
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar) {
-        const scrollTop = window.pageYOffset;
-        if (scrollTop > 100) {
-            sidebar.style.boxShadow = '2px 0 20px rgba(0, 255, 255, 0.2)';
-        } else {
-            sidebar.style.boxShadow = 'none';
-        }
-    }
-});
-
-// 链接点击效果
-document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', function() {
-        this.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            this.style.transform = 'scale(1)';
-        }, 150);
-    });
-});
-
-// 页面加载完成后的初始化
+// 页面加载完成后创建粒子效果
 document.addEventListener('DOMContentLoaded', () => {
-    // 添加页面加载完成的类
-    document.body.classList.add('loaded');
-    
-    // 初始化所有动画元素
-    setTimeout(() => {
-        const elements = document.querySelectorAll('.section-block, .paper-box, .patent-item, .award-item, .education-item');
-        elements.forEach((el, index) => {
-            setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
-    }, 500);
+    setTimeout(createParticles, 1000);
 }); 
