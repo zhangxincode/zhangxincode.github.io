@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片调试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-image {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #333;
+            margin: 10px;
+            object-fit: cover;
+        }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; font-weight: bold; }
+        .info { color: blue; font-weight: bold; }
+        .debug-info {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitHub Pages 图片调试工具</h1>
+    
+    <div class="test-section">
+        <h2>1. 当前页面信息</h2>
+        <div class="debug-info" id="page-info">
+            正在获取页面信息...
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. 图片路径测试</h2>
+        
+        <h3>测试1: 根目录图片 (my_photo.jpg)</h3>
+        <img src="my_photo.jpg" alt="根目录图片" class="test-image" 
+             onload="updateStatus('status1', 'success', '✓ 加载成功')" 
+             onerror="updateStatus('status1', 'error', '✗ 加载失败')">
+        <div id="status1" class="info">加载中...</div>
+        
+        <h3>测试2: images文件夹图片 (images/my_photo.jpg)</h3>
+        <img src="images/my_photo.jpg" alt="images文件夹图片" class="test-image"
+             onload="updateStatus('status2', 'success', '✓ 加载成功')" 
+             onerror="updateStatus('status2', 'error', '✗ 加载失败')">
+        <div id="status2" class="info">加载中...</div>
+        
+        <h3>测试3: 绝对路径 (/my_photo.jpg)</h3>
+        <img src="/my_photo.jpg" alt="绝对路径图片" class="test-image"
+             onload="updateStatus('status3', 'success', '✓ 加载成功')" 
+             onerror="updateStatus('status3', 'error', '✗ 加载失败')">
+        <div id="status3" class="info">加载中...</div>
+        
+        <h3>测试4: 绝对路径images (/images/my_photo.jpg)</h3>
+        <img src="/images/my_photo.jpg" alt="绝对路径images图片" class="test-image"
+             onload="updateStatus('status4', 'success', '✓ 加载成功')" 
+             onerror="updateStatus('status4', 'error', '✗ 加载失败')">
+        <div id="status4" class="info">加载中...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. 文件存在性检查</h2>
+        <div class="debug-info" id="file-checks">
+            正在检查文件...
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. 网络请求测试</h2>
+        <div class="debug-info" id="network-tests">
+            正在测试网络请求...
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. 解决方案建议</h2>
+        <div id="suggestions">
+            <p><strong>如果图片仍然不显示，请尝试以下步骤：</strong></p>
+            <ol>
+                <li>等待几分钟让GitHub Pages更新</li>
+                <li>清除浏览器缓存 (Ctrl+Shift+R 或 Cmd+Shift+R)</li>
+                <li>检查图片文件名大小写是否正确</li>
+                <li>确保图片文件已成功上传到GitHub</li>
+                <li>尝试使用不同的图片格式 (PNG, JPG, WebP)</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function updateStatus(elementId, className, message) {
+            const element = document.getElementById(elementId);
+            element.className = className;
+            element.textContent = message;
+        }
+        
+        // 获取页面信息
+        document.getElementById('page-info').innerHTML = `
+            <strong>当前URL:</strong> ${window.location.href}<br>
+            <strong>协议:</strong> ${window.location.protocol}<br>
+            <strong>主机:</strong> ${window.location.host}<br>
+            <strong>路径:</strong> ${window.location.pathname}<br>
+            <strong>用户代理:</strong> ${navigator.userAgent}
+        `;
+        
+        // 检查文件存在性
+        const filesToCheck = [
+            'my_photo.jpg',
+            'images/my_photo.jpg',
+            '/my_photo.jpg',
+            '/images/my_photo.jpg'
+        ];
+        
+        let fileCheckResults = '';
+        filesToCheck.forEach(file => {
+            fetch(file)
+                .then(response => {
+                    if (response.ok) {
+                        fileCheckResults += `<strong>${file}:</strong> <span class="success">✓ 存在 (${response.status})</span><br>`;
+                    } else {
+                        fileCheckResults += `<strong>${file}:</strong> <span class="error">✗ 不存在 (${response.status})</span><br>`;
+                    }
+                    document.getElementById('file-checks').innerHTML = fileCheckResults;
+                })
+                .catch(error => {
+                    fileCheckResults += `<strong>${file}:</strong> <span class="error">✗ 错误 (${error.message})</span><br>`;
+                    document.getElementById('file-checks').innerHTML = fileCheckResults;
+                });
+        });
+        
+        // 网络请求测试
+        setTimeout(() => {
+            const networkInfo = `
+                <strong>图片加载测试结果:</strong><br>
+                <span id="network-results">正在测试...</span>
+            `;
+            document.getElementById('network-tests').innerHTML = networkInfo;
+            
+            // 测试图片加载时间
+            const img = new Image();
+            const startTime = Date.now();
+            img.onload = function() {
+                const loadTime = Date.now() - startTime;
+                document.getElementById('network-results').innerHTML = 
+                    `<span class="success">✓ 图片加载成功，耗时: ${loadTime}ms</span>`;
+            };
+            img.onerror = function() {
+                document.getElementById('network-results').innerHTML = 
+                    `<span class="error">✗ 图片加载失败</span>`;
+            };
+            img.src = 'images/my_photo.jpg';
+        }, 2000);
+    </script>
+</body>
+</html> 
