@@ -382,3 +382,350 @@ document.head.appendChild(particleStyle);
 
 // 页面加载时创建粒子
 document.addEventListener('DOMContentLoaded', createParticles); 
+
+// 语言切换功能
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取语言切换按钮
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    // 当前语言状态（默认为英文）
+    let currentLang = 'en';
+    
+    // 语言切换函数
+    function switchLanguage(lang) {
+        currentLang = lang;
+        
+        // 更新按钮状态
+        langButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.lang === lang) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // 更新页面语言属性
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        
+        // 更新所有带有data-en和data-zh属性的元素
+        const elements = document.querySelectorAll('[data-en][data-zh]');
+        elements.forEach(element => {
+            if (lang === 'zh') {
+                element.textContent = element.dataset.zh;
+            } else {
+                element.textContent = element.dataset.en;
+            }
+        });
+        
+        // 更新页面标题
+        const title = document.querySelector('title');
+        if (lang === 'zh') {
+            title.textContent = '张鑫 - 学术主页';
+        } else {
+            title.textContent = 'Xin Zhang - Academic Homepage';
+        }
+        
+        // 保存语言偏好到本地存储
+        localStorage.setItem('preferredLanguage', lang);
+        
+        // 添加切换动画效果
+        document.body.style.opacity = '0.8';
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 150);
+    }
+    
+    // 为每个语言按钮添加点击事件
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.dataset.lang;
+            if (lang !== currentLang) {
+                switchLanguage(lang);
+            }
+        });
+    });
+    
+    // 页面加载时检查本地存储的语言偏好
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang && (savedLang === 'en' || savedLang === 'zh')) {
+        switchLanguage(savedLang);
+    } else {
+        // 默认设置为英文
+        switchLanguage('en');
+    }
+    
+    // 平滑滚动功能
+    const navLinks = document.querySelectorAll('.nav-item');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const sidebarHeight = document.querySelector('.sidebar').offsetHeight;
+                const targetPosition = targetSection.offsetTop - 100;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // 添加页面加载动画
+    window.addEventListener('load', function() {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 100);
+    });
+    
+    // 添加滚动时的视差效果
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.stars, .twinkling');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+    
+    // 添加导航栏激活状态
+    const sections = document.querySelectorAll('.section-block');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    window.addEventListener('scroll', function() {
+        let current = '';
+        const scrollPosition = window.scrollY + 200;
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${current}`) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // 添加鼠标悬停效果
+    const interactiveElements = document.querySelectorAll('.nav-item, .author-urls li, .research-areas li, .education-item, .paper-box, .award-item');
+    
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = this.style.transform + ' scale(1.02)';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            this.style.transform = this.style.transform.replace(' scale(1.02)', '');
+        });
+    });
+    
+    // 添加键盘快捷键支持
+    document.addEventListener('keydown', function(e) {
+        // Ctrl/Cmd + L 切换语言
+        if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+            e.preventDefault();
+            const newLang = currentLang === 'en' ? 'zh' : 'en';
+            switchLanguage(newLang);
+        }
+        
+        // 数字键快速导航
+        if (e.key >= '1' && e.key <= '4') {
+            e.preventDefault();
+            const sections = ['about', 'education', 'publications', 'awards'];
+            const targetSection = sections[parseInt(e.key) - 1];
+            const targetElement = document.querySelector(`#${targetSection}`);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+    
+    // 添加触摸设备支持
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.changedTouches[0].screenY;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartY - touchEndY;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // 向上滑动 - 可以添加一些交互
+                console.log('Swiped up');
+            } else {
+                // 向下滑动 - 可以添加一些交互
+                console.log('Swiped down');
+            }
+        }
+    }
+    
+    // 添加性能优化
+    let ticking = false;
+    
+    function updateOnScroll() {
+        // 这里可以添加滚动时的性能优化代码
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateOnScroll);
+            ticking = true;
+        }
+    });
+    
+    // 添加错误处理
+    window.addEventListener('error', function(e) {
+        console.error('页面错误:', e.error);
+    });
+    
+    // 添加页面可见性API支持
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            // 页面隐藏时的处理
+            console.log('页面已隐藏');
+        } else {
+            // 页面显示时的处理
+            console.log('页面已显示');
+        }
+    });
+});
+
+// 添加一些额外的工具函数
+const Utils = {
+    // 防抖函数
+    debounce: function(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+    
+    // 节流函数
+    throttle: function(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    },
+    
+    // 格式化日期
+    formatDate: function(date) {
+        return new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).format(date);
+    }
+};
+
+// 导出工具函数供全局使用
+window.Utils = Utils;
+
+// 樱花效果
+function initSakuraEffect() {
+    console.log('初始化樱花效果');
+    
+    const sakuraContainer = document.getElementById('sakuraContainer');
+    if (!sakuraContainer) {
+        console.error('樱花容器未找到');
+        return;
+    }
+    
+    console.log('找到樱花容器:', sakuraContainer);
+    
+    let sakuraCount = 0;
+    const maxSakura = 6; // 减少樱花数量
+    
+                // 创建樱花
+            function createSakura() {
+                if (sakuraCount >= maxSakura) return;
+                
+                const sakura = document.createElement('div');
+                sakura.className = 'sakura';
+                
+                // 随机位置
+                const startX = Math.random() * window.innerWidth;
+                const fallDuration = Math.random() * 6 + 4; // 飘落时间 4-10秒
+                
+                sakura.style.left = startX + 'px';
+                sakura.style.animationDuration = fallDuration + 's';
+                sakura.style.animationDelay = Math.random() * 2 + 's';
+                
+                sakuraContainer.appendChild(sakura);
+                sakuraCount++;
+                
+                console.log('创建樱花', sakuraCount);
+                
+                // 樱花落地后移除
+                setTimeout(() => {
+                    if (sakura.parentNode) {
+                        sakura.parentNode.removeChild(sakura);
+                        sakuraCount--;
+                    }
+                }, fallDuration * 1000);
+            }
+    
+    // 立即创建一些樱花进行测试
+    setTimeout(() => {
+        console.log('开始创建樱花');
+        createSakura();
+        createSakura();
+        createSakura();
+    }, 500);
+    
+    // 定期创建樱花
+    setInterval(() => {
+        if (sakuraCount < maxSakura) {
+            createSakura();
+        }
+    }, 2000);
+}
+
+// 在DOM加载完成后初始化樱花效果
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM加载完成，开始初始化樱花效果');
+    initSakuraEffect();
+});
+
+// 如果DOM已经加载完成，立即初始化
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSakuraEffect);
+} else {
+    initSakuraEffect();
+} 

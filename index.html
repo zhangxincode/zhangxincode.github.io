@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <!-- 最后更新时间: 2025-06-28 12:46:33 -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>张鑫 - 学术主页</title>
+    <title>Xin Zhang - Academic Homepage</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="stars"></div>
     <div class="twinkling"></div>
+    
+    <!-- 樱花容器 -->
+    <div class="sakura-container" id="sakuraContainer"></div>
+    
+    <!-- 语言切换按钮 -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
     
     <div id="main" role="main">
         <!-- 左侧个人信息栏 -->
@@ -20,7 +29,7 @@
             <div class="profile-box">
 
                 <div class="author-avatar">
-                    <img src="images/myphoto.jpg" alt="zhangxin" class="avatar-image" onerror="this.style.display='none'; document.querySelector('.avatar-placeholder').style.display='block'">
+                    <img src="images/myphoto.jpg" alt="Xin Zhang" class="avatar-image" onerror="this.style.display='none'; document.querySelector('.avatar-placeholder').style.display='block'">
                     <div class="avatar-placeholder" style="display: none;">
                         <i class="fas fa-user"></i>
                     </div>
@@ -28,15 +37,13 @@
                 
                 
                 <div class="author-content">
-                    <h3 class="author-name">张鑫</h3>
-                    <p class="author-bio">吉林大学人工智能专业研究生</p>
-                    <p class="author-description">一个又菜又爱的AI student! </p>
+                    <h3 class="author-name" data-en="Xin Zhang" data-zh="张鑫">Xin Zhang</h3>
+                    <p class="author-bio" data-en="AI Graduate Student at Jilin University" data-zh="吉林大学人工智能专业研究生">AI Graduate Student at Jilin University</p>
+                    <p class="author-description" data-en="A passionate AI student who loves to learn and explore!" data-zh="一个又菜又爱的AI student!">A passionate AI student who loves to learn and explore!</p>
                 </div>
                 
                 <div class="author-urls-wrapper">
                     <ul class="author-urls social-icons">
-                        <li><i class="fas fa-fw fa-map-marker" aria-hidden="true"></i> 吉林大学</li>
-                        <li><i class="fas fa-fw fa-graduation-cap" aria-hidden="true"></i> 人工智能专业</li>
                         <li><a href="mailto:912030044@qq.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
                         <li><a href="https://github.com/zhangxincode"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
                         <li><a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&user=GNv-lPoAAAAJ"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
@@ -50,10 +57,10 @@
             <!-- 简单导航栏 -->
             <nav class="simple-nav">
                 <ul class="nav-menu">
-                    <li><a href="#about" class="nav-item">关于我</a></li>
-                    <li><a href="#education" class="nav-item">教育经历</a></li>
-                    <li><a href="#publications" class="nav-item">论文专利</a></li>
-                    <li><a href="#awards" class="nav-item">获奖经历</a></li>
+                    <li><a href="#about" class="nav-item" data-en="About Me" data-zh="关于我">About Me</a></li>
+                    <li><a href="#education" class="nav-item" data-en="Education" data-zh="教育经历">Education</a></li>
+                    <li><a href="#publications" class="nav-item" data-en="Publications" data-zh="论文专利">Publications</a></li>
+                    <li><a href="#awards" class="nav-item" data-en="Awards" data-zh="获奖经历">Awards</a></li>
                 </ul>
             </nav>
 
@@ -63,47 +70,45 @@
                         
                         <!-- 关于我 -->
                         <div class="section-block" id="about">
-                            <h2 class="section-title">关于我</h2>
-                            <p>吉林大学人工智能专业研0，本科毕业于东北农业大学人工智能专业。目前着重于图模型的学习与研究，希望早日诞生成果。</p>
+                            <h2 class="section-title" data-en="About Me" data-zh="关于我">About Me</h2>
+                            <p data-en="I am a graduate student in Artificial Intelligence at Jilin University, with a bachelor's degree in AI from Northeast Agricultural University. Currently, I focus on learning and researching graph models, hoping to achieve significant results soon." data-zh="吉林大学人工智能专业研0，本科毕业于东北农业大学人工智能专业。目前着重于图模型的学习与研究，希望早日诞生成果。">I am a graduate student in Artificial Intelligence at Jilin University, with a bachelor's degree in AI from Northeast Agricultural University. Currently, I focus on learning and researching graph models, hoping to achieve significant results soon.</p>
                             
-                            <h3>研究领域</h3>
+                            <h3 data-en="Research Areas" data-zh="研究领域">Research Areas</h3>
                             <ul class="research-areas">
-                                <li>深度学习</li>
-                                <li>计算机视觉</li>
-                                <li>人工智能应用</li>
-                                <li>网页防篡改检测</li>
-                                <li>药物相互作用预测</li>
-                                <li>人体姿态估计</li>
-                                <li>机器学习算法优化</li>
+                                <li data-en="Deep Learning" data-zh="深度学习">Deep Learning</li>
+                                <li data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</li>
+                                <li data-en="AI Applications" data-zh="人工智能应用">AI Applications</li>
+                                <li data-en="Graph Model Research" data-zh="图模型研究">Graph Model Research</li>
+                                <li data-en="Machine Learning Optimization" data-zh="机器学习算法优化">Machine Learning Optimization</li>
                             </ul>
 
-                            <h3>最近</h3>
+                            <h3 data-en="Recent Updates" data-zh="最近">Recent Updates</h3>
                             <ul class="recent">
-                                <li><i class="fas fa-fw font-awesome" aria-hidden="true"></i> 2025.04 吉林大学考研拟录取</li>
+                                <li><i class="fas fa-fw font-awesome" aria-hidden="true"></i> <span data-en="2025.04 Admitted to Jilin University Graduate Program" data-zh="2025.04 吉林大学考研拟录取">2025.04 Admitted to Jilin University Graduate Program</span></li>
                             </ul>
                         </div>
 
 
                         <!-- 教育经历 -->
                         <div class="section-block" id="education">
-                            <h2 class="section-title">🎓 教育经历</h2>
+                            <h2 class="section-title">🎓 <span data-en="Education" data-zh="教育经历">Education</span></h2>
                             <div class="education-item">
                                 <div class="education-header">
-                                    <span class="education-period">2025.09 - 现在</span>
-                                    <span class="education-school">吉林大学（985/双一流）</span>
+                                    <span class="education-period">2025.09 - <span data-en="Present" data-zh="现在">Present</span></span>
+                                    <span class="education-school">Jilin University (985/Double First-Class)</span>
                                 </div>
                                 <div class="education-details">
-                                    <p>人工智能专业 | 研究生</p>
+                                    <p><span data-en="Artificial Intelligence" data-zh="人工智能专业">Artificial Intelligence</span> | <span data-en="Graduate Student" data-zh="研究生">Graduate Student</span></p>
                                 </div>
                             </div>
                             
                             <div class="education-item">
                                 <div class="education-header">
                                     <span class="education-period">2021.09 - 2025.06</span>
-                                    <span class="education-school">东北农业大学（211/双一流）</span>
+                                    <span class="education-school">Northeast Agricultural University (211/Double First-Class)</span>
                                 </div>
                                 <div class="education-details">
-                                    <p>人工智能专业 | 本科</p>
+                                    <p><span data-en="Artificial Intelligence" data-zh="人工智能专业">Artificial Intelligence</span> | <span data-en="Bachelor's Degree" data-zh="本科">Bachelor's Degree</span></p>
                                 
                                 </div>
                             </div>
@@ -117,89 +122,71 @@
                         
                         <!-- 论文专利 -->
                         <div class="section-block" id="publications">
-                            <h2 class="section-title">📝 论文专利</h2>
+                            <h2 class="section-title">📝 <span data-en="Publications & Patents" data-zh="论文专利">Publications & Patents</span></h2>
                             
                             <div class="paper-box">
                                 <div class="paper-box-image">
                                     <div class="badge">EI 2024</div>
-                                    <div class="paper-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
                                 </div>
                                 <div class="paper-box-text">
-                                    <p><strong>Plant Disease Identification under Imbalanced Dataset using Hybrid Deep Learning Method</strong></p>
+                                    <p><strong data-en="Plant Disease Identification under Imbalanced Dataset using Hybrid Deep Learning Method" data-zh="Plant Disease Identification under Imbalanced Dataset using Hybrid Deep Learning Method">Plant Disease Identification under Imbalanced Dataset using Hybrid Deep Learning Method</strong></p>
                                     <p>DOI: <a href="https://doi.org/10.1007/s40030-024-00851-z">10.1007/s40030-024-00851-z</a></p>
-                                    <span class="status published">已发表</span>
+                                    <span class="status published" data-en="Published" data-zh="已发表">Published</span>
                                 </div>
                             </div>
 
                             <div class="paper-box">
                                 <div class="paper-box-image">
-                                    <div class="badge">核心期刊 2023</div>
-                                    <div class="paper-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
+                                    <div class="badge" data-en="Core Journal 2023" data-zh="核心期刊 2023">Core Journal 2023</div>
                                 </div>
                                 <div class="paper-box-text">
-                                    <p><strong>融合ＤＲＡＥ与ＳＶＭ的网页防篡改检测</strong></p>
+                                    <p><strong data-en="Web Tampering Detection Based on DRAE and SVM Integration" data-zh="融合ＤＲＡＥ与ＳＶＭ的网页防篡改检测">Web Tampering Detection Based on DRAE and SVM Integration</strong></p>
                                     <p>DOI: <a href="https://doi.org/10.7631/issn.1000-2243.23334">10.7631/issn.1000-2243.23334</a></p>
-                                    <span class="status published">已发表</span>
+                                    <span class="status published" data-en="Published" data-zh="已发表">Published</span>
                                 </div>
                             </div>
 
                             <div class="paper-box">
                                 <div class="paper-box-image">
-                                    <div class="badge">软件著作权 2023</div>
-                                    <div class="paper-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
+                                    <div class="badge" data-en="Software Copyright 2023" data-zh="软件著作权 2023">Software Copyright 2023</div>
                                 </div>
                                 <div class="paper-box-text">
-                                    <p><strong>基于多模态机器学习的网页防篡改检测软件</strong></p>
-                                    <p>获批日期: 2023.04.30</p>
-                                    <span class="status approved">已获批</span>
+                                    <p><strong data-en="Multi-modal Machine Learning Based Web Tampering Detection Software" data-zh="基于多模态机器学习的网页防篡改检测软件">Multi-modal Machine Learning Based Web Tampering Detection Software</strong></p>
+                                    <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2023.04.30</p>
+                                    <span class="status approved" data-en="Approved" data-zh="已获批">Approved</span>
                                 </div>
                             </div>
 
                             <div class="paper-box">
                                 <div class="paper-box-image">
-                                    <div class="badge">软件著作权 2023</div>
-                                    <div class="paper-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
+                                    <div class="badge" data-en="Software Copyright 2023" data-zh="软件著作权 2023">Software Copyright 2023</div>
                                 </div>
                                 <div class="paper-box-text">
-                                    <p><strong>基于深度学习的药物-药物相互作用预测系统</strong></p>
-                                    <p>获批日期: 2023.02.12</p>
-                                    <span class="status approved">已获批</span>
+                                    <p><strong data-en="Deep Learning Based Drug-Drug Interaction Prediction System" data-zh="基于深度学习的药物-药物相互作用预测系统">Deep Learning Based Drug-Drug Interaction Prediction System</strong></p>
+                                    <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2023.02.12</p>
+                                    <span class="status approved" data-en="Approved" data-zh="已获批">Approved</span>
                                 </div>
                             </div>
 
                             <div class="paper-box">
                                 <div class="paper-box-image">
-                                    <div class="badge">软件著作权 2022</div>
-                                    <div class="paper-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
+                                    <div class="badge" data-en="Software Copyright 2022" data-zh="软件著作权 2022">Software Copyright 2022</div>
                                 </div>
                                 <div class="paper-box-text">
-                                    <p><strong>基于OpenCV的数据自动采集系统</strong></p>
-                                    <p>获批日期: 2022.10.14</p>
-                                    <span class="status approved">已获批</span>
+                                    <p><strong data-en="OpenCV Based Automatic Data Collection System" data-zh="基于OpenCV的数据自动采集系统">OpenCV Based Automatic Data Collection System</strong></p>
+                                    <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2022.10.14</p>
+                                    <span class="status approved" data-en="Approved" data-zh="已获批">Approved</span>
                                 </div>
                             </div>
 
                             <div class="paper-box">
                                 <div class="paper-box-image">
-                                    <div class="badge">软件著作权 2022</div>
-                                    <div class="paper-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
+                                    <div class="badge" data-en="Software Copyright 2022" data-zh="软件著作权 2022">Software Copyright 2022</div>
                                 </div>
                                 <div class="paper-box-text">
-                                    <p><strong>基于OpenCV的人体姿态估计系统</strong></p>
-                                    <p>获批日期: 2022.10.10</p>
-                                    <span class="status approved">已获批</span>
+                                    <p><strong data-en="OpenCV Based Human Pose Estimation System" data-zh="基于OpenCV的人体姿态估计系统">OpenCV Based Human Pose Estimation System</strong></p>
+                                    <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2022.10.10</p>
+                                    <span class="status approved" data-en="Approved" data-zh="已获批">Approved</span>
                                 </div>
                             </div>
                         </div>
@@ -210,104 +197,104 @@
 
                         <!-- 获奖经历 -->
                         <div class="section-block" id="awards">
-                            <h2 class="section-title">🏅 获奖经历</h2>
+                            <h2 class="section-title">🏅 <span data-en="Awards & Honors" data-zh="获奖经历">Awards & Honors</span></h2>
                             
-                            <h3><i class="fas fa-trophy"></i> 国家级</h3>
+                            <h3><i class="fas fa-trophy"></i> <span data-en="National Level" data-zh="国家级">National Level</span></h3>
                             <div class="awards-list">
                                 
                                 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">第二届IPv6技术应用创新大赛</span>
-                                        <span class="award-level">三等奖</span>
+                                        <span class="award-name" data-en="2nd IPv6 Technology Application Innovation Competition" data-zh="第二届IPv6技术应用创新大赛">2nd IPv6 Technology Application Innovation Competition</span>
+                                        <span class="award-level" data-en="Third Prize" data-zh="三等奖">Third Prize</span>
                                     </div>
                                     <span class="award-date">2024.11</span>
                                 </div>
                                 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">第二届全国大学生C语言程序设计大赛-本科赛道</span>
-                                        <span class="award-level">三等奖</span>
+                                        <span class="award-name" data-en="2nd National College Student C Programming Contest - Undergraduate Track" data-zh="第二届全国大学生C语言程序设计大赛-本科赛道">2nd National College Student C Programming Contest - Undergraduate Track</span>
+                                        <span class="award-level" data-en="Third Prize" data-zh="三等奖">Third Prize</span>
                                     </div>
                                     <span class="award-date">2023.06</span>
                                 </div>
 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">首届IPv6技术应用创新大赛科教赛道暨第六届下一代互联网技术创新大赛</span>
-                                        <span class="award-level">二等奖</span>
+                                        <span class="award-name" data-en="1st IPv6 Technology Application Innovation Competition Education Track & 6th Next Generation Internet Technology Innovation Competition" data-zh="首届IPv6技术应用创新大赛科教赛道暨第六届下一代互联网技术创新大赛">1st IPv6 Technology Application Innovation Competition Education Track & 6th Next Generation Internet Technology Innovation Competition</span>
+                                        <span class="award-level" data-en="Second Prize" data-zh="二等奖">Second Prize</span>
                                     </div>
                                     <span class="award-date">2022.12</span>
                                 </div>
 
                             </div>
                             
-                            <h3><i class="fas fa-medal"></i> 省级</h3>
+                            <h3><i class="fas fa-medal"></i> <span data-en="Provincial Level" data-zh="省级">Provincial Level</span></h3>
                             <div class="awards-list">
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">全国大学生数学建模竞赛黑龙江赛区</span>
-                                        <span class="award-level">一等奖</span>
+                                        <span class="award-name" data-en="National Mathematical Modeling Competition Heilongjiang Division" data-zh="全国大学生数学建模竞赛黑龙江赛区">National Mathematical Modeling Competition Heilongjiang Division</span>
+                                        <span class="award-level" data-en="First Prize" data-zh="一等奖">First Prize</span>
                                     </div>
                                     <span class="award-date">2023.12</span>
                                 </div>
                                 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">第十七届iCAN大学生创新创业大赛（黑龙江赛区选拔赛）</span>
-                                        <span class="award-level">一等奖</span>
+                                        <span class="award-name" data-en="17th iCAN College Student Innovation and Entrepreneurship Competition (Heilongjiang Division)" data-zh="第十七届iCAN大学生创新创业大赛（黑龙江赛区选拔赛）">17th iCAN College Student Innovation and Entrepreneurship Competition (Heilongjiang Division)</span>
+                                        <span class="award-level" data-en="First Prize" data-zh="一等奖">First Prize</span>
                                     </div>
                                     <span class="award-date">2023.10</span>
                                 </div>
                                 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">黑龙江省大学生植物保护专业能力大赛｜创新创业优秀项目展示</span>
-                                        <span class="award-level">一等奖</span>
+                                        <span class="award-name" data-en="Heilongjiang College Student Plant Protection Professional Skills Competition | Innovation and Entrepreneurship Excellent Project Exhibition" data-zh="黑龙江省大学生植物保护专业能力大赛｜创新创业优秀项目展示">Heilongjiang College Student Plant Protection Professional Skills Competition | Innovation and Entrepreneurship Excellent Project Exhibition</span>
+                                        <span class="award-level" data-en="First Prize" data-zh="一等奖">First Prize</span>
                                     </div>
                                     <span class="award-date">2023.09.18</span>
                                 </div>
                                 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">黑龙江省第七届"知识产权杯"高校发明创新竞赛</span>
-                                        <span class="award-level">一等奖</span>
+                                        <span class="award-name" data-en="7th Heilongjiang 'Intellectual Property Cup' University Invention Innovation Competition" data-zh="黑龙江省第七届'知识产权杯'高校发明创新竞赛">7th Heilongjiang 'Intellectual Property Cup' University Invention Innovation Competition</span>
+                                        <span class="award-level" data-en="First Prize" data-zh="一等奖">First Prize</span>
                                     </div>
                                     <span class="award-date">2023.07.03</span>
                                 </div>
                                 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">黑龙江省第七届"知识产权杯"高校发明创新竞赛</span>
-                                        <span class="award-level">二等奖</span>
+                                        <span class="award-name" data-en="7th Heilongjiang 'Intellectual Property Cup' University Invention Innovation Competition" data-zh="黑龙江省第七届'知识产权杯'高校发明创新竞赛">7th Heilongjiang 'Intellectual Property Cup' University Invention Innovation Competition</span>
+                                        <span class="award-level" data-en="Second Prize" data-zh="二等奖">Second Prize</span>
                                     </div>
                                     <span class="award-date">2023.07.03</span>
                                 </div>
                             </div>
 
-                            <h3><i class="fas fa-star"></i> 校级</h3>
+                            <h3><i class="fas fa-star"></i> <span data-en="University Level" data-zh="校级">University Level</span></h3>
                             <div class="awards-list">
 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">全国大学生统计建模大赛</span>
-                                        <span class="award-level">校级一等奖</span>
+                                        <span class="award-name" data-en="National College Student Statistical Modeling Competition" data-zh="全国大学生统计建模大赛">National College Student Statistical Modeling Competition</span>
+                                        <span class="award-level" data-en="University First Prize" data-zh="校级一等奖">University First Prize</span>
                                     </div>
                                     <span class="award-date">2024.07</span>
                                 </div>
 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">"挑战杯"第十四届大学生创新创业大赛</span>
-                                        <span class="award-level">校级二等奖</span>
+                                        <span class="award-name" data-en="14th 'Challenge Cup' College Student Innovation and Entrepreneurship Competition" data-zh="'挑战杯'第十四届大学生创新创业大赛">14th 'Challenge Cup' College Student Innovation and Entrepreneurship Competition</span>
+                                        <span class="award-level" data-en="University Second Prize" data-zh="校级二等奖">University Second Prize</span>
                                     </div>
                                     <span class="award-date">2024.05.20</span>
                                 </div>
 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">2023年东北农业大学数学建模竞赛</span>
-                                        <span class="award-level">二等奖</span>
+                                        <span class="award-name" data-en="2023 Northeast Agricultural University Mathematical Modeling Competition" data-zh="2023年东北农业大学数学建模竞赛">2023 Northeast Agricultural University Mathematical Modeling Competition</span>
+                                        <span class="award-level" data-en="Second Prize" data-zh="二等奖">Second Prize</span>
                                     </div>
                                     <span class="award-date">2023.08</span>
                                 </div>
@@ -315,8 +302,8 @@
 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">"挑战杯"第十三届全国大学生课外学术科技作品竞赛</span>
-                                        <span class="award-level">校级一等奖</span>
+                                        <span class="award-name" data-en="13th 'Challenge Cup' National College Student Extracurricular Academic Science and Technology Competition" data-zh="'挑战杯'第十三届全国大学生课外学术科技作品竞赛">13th 'Challenge Cup' National College Student Extracurricular Academic Science and Technology Competition</span>
+                                        <span class="award-level" data-en="University First Prize" data-zh="校级一等奖">University First Prize</span>
                                     </div>
                                     <span class="award-date">2023.06.06</span>
                                 </div>
@@ -325,8 +312,8 @@
                                 
                                 <div class="award-item">
                                     <div class="award-header">
-                                        <span class="award-name">"正大杯"第十三届全国大学生市场调查与分析大赛</span>
-                                        <span class="award-level">校级二等奖</span>
+                                        <span class="award-name" data-en="13th 'Zhengda Cup' National College Student Market Survey and Analysis Competition" data-zh="'正大杯'第十三届全国大学生市场调查与分析大赛">13th 'Zhengda Cup' National College Student Market Survey and Analysis Competition</span>
+                                        <span class="award-level" data-en="University Second Prize" data-zh="校级二等奖">University Second Prize</span>
                                     </div>
                                     <span class="award-date">2023.05</span>
                                 </div>
@@ -348,7 +335,7 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy;  张鑫. 用AI构建未来</p>
+            <p>&copy; <span data-en="Building the Future with AI!" data-zh="AI构建未来！">Building the Future with AI!</span></p>
         </div>
     </footer>
 
