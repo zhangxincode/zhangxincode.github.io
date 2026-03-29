@@ -6,13 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xin Zhang - Academic Homepage</title>
-    <link rel="stylesheet" href="style-optimized.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="stars"></div>
     <div class="twinkling"></div>
+    <canvas id="code-rain" aria-hidden="true"></canvas>
+    <div class="scanline-overlay" aria-hidden="true"></div>
     
     <!-- 语言切换按钮 -->
     <div class="language-switcher">
@@ -38,7 +40,7 @@
                     <p class="author-bio" data-en="AI Master at Jilin University" data-zh="吉林大学人工智能专业研究生">AI Master at Jilin University</p>
                     <p class="author-description" data-en="A passionate AI student who loves to learn and explore!" data-zh="一个又菜又爱的AI student!">A passionate AI student who loves to learn and explore!</p>
                 </div>
-                
+
                 <div class="author-urls-wrapper">
                     <ul class="author-urls social-icons">
                         <li><a href="mailto:912030044@qq.com"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
@@ -61,6 +63,28 @@
                 </ul>
             </nav>
 
+
+            <section class="hero-terminal animate-on-scroll" aria-label="intro terminal">
+                <div class="terminal-window digital-terminal">
+                    <div class="terminal-bar">
+                        <span class="terminal-dot dot-red"></span>
+                        <span class="terminal-dot dot-yellow"></span>
+                        <span class="terminal-dot dot-green"></span>
+                        <span class="terminal-title">xin@homepage:~</span>
+                        <span class="terminal-status">SYSTEM ONLINE</span>
+                    </div>
+                    <div class="terminal-hud" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <div class="terminal-body" id="terminal-output">
+                        <div class="terminal-line terminal-reveal"><span class="prompt">$</span> <span class="command typing-target" data-text-en="whoami" data-text-zh="whoami"></span><span class="cursor"></span></div>
+                        <div class="terminal-line output terminal-reveal"><span data-en="Xin Zhang · AI Master · Graph / LLM Researcher" data-zh="张鑫 · 人工智能研究生 · 图学习 / LLM 研究者">Xin Zhang · AI Master · Graph / LLM Researcher</span></div>
+                        <div class="terminal-line terminal-reveal"><span class="prompt">$</span> <span class="command typing-target" data-text-en="cat focus.txt" data-text-zh="cat focus.txt"></span><span class="cursor"></span></div>
+                        <div class="terminal-line output terminal-reveal"><span data-en="Building reliable AI systems with graph learning, multi-agent systems, and FairLLM exploration." data-zh="聚焦图学习、多智能体系统与 FairLLM，探索更可靠的 AI 系统。">Building reliable AI systems with graph learning, multi-agent systems, and FairLLM exploration.</span></div>
+                        <div class="terminal-line terminal-reveal"><span class="prompt">$</span> <span class="command typing-target" data-text-en="ls skills/" data-text-zh="ls skills/"></span><span class="cursor"></span></div>
+                        <div class="terminal-line output terminal-reveal terminal-skills-text"><span data-en="graph/  mas/  llm_systems/  fairness/" data-zh="graph/  mas/  llm_systems/  fairness/">graph/  mas/  llm_systems/  fairness/</span></div>
+                    </div>
+                </div>
+            </section>
+
             <article class="page">
                 <div class="page-inner-wrap">
                     <section class="page-content">
@@ -75,9 +99,9 @@
                             <h3 data-en="Research Areas" data-zh="研究领域">Research Areas</h3>
                             <ul class="research-areas">
                                 <li data-en="Deep Learning" data-zh="深度学习">Deep Learning</li>
-                                <li data-en="Multi-agent Systems" data-zh="多智能体系统">Multi-agent Systems</li>
                                 <li data-en="Graph Model Research" data-zh="图模型研究">Graph Model Research</li>
                                 <li data-en="FairLLM" data-zh="公平LLM">FairLLM</li>
+                                <li data-en="Multi-agent Systems" data-zh="多智能体系统">Multi-agent Systems</li>
                             </ul>
 
 
@@ -117,12 +141,6 @@
                             </div>
                         </div>
 
-
-
-
-
-
-                        
                         <!-- 论文专利 -->
                         <div class="section-block" id="publications">
                             <h2 class="section-title">📝 <span data-en="Publications & Patents" data-zh="论文专利">Publications & Patents</span></h2>
