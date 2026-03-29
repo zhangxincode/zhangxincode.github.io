@@ -125,14 +125,26 @@ function buildTerminalSequence() {
 
 function typeText(target, text, speed, runId, done) {
     let index = 0;
+    const line = target.closest('.terminal-line');
+    const cursor = line ? line.querySelector('.cursor-inline') : null;
+
+    if (cursor) {
+        cursor.style.display = 'inline-block';
+    }
+
     function step() {
         if (runId !== terminalRunId) return;
         target.textContent = text.slice(0, index);
         index += 1;
         if (index <= text.length) {
             schedule(step, speed);
-        } else if (done) {
-            done();
+        } else {
+            if (cursor) {
+                cursor.style.display = 'none';
+            }
+            if (done) {
+                done();
+            }
         }
     }
     step();
@@ -291,6 +303,47 @@ function drawMeteorCodeRain() {
     window.addEventListener('resize', resize);
 }
 
+
+function setupIntroPortal() {
+    const overlay = document.getElementById('intro-overlay');
+    const ball = document.getElementById('portal-ball');
+    if (!overlay || !ball) return;
+
+    let isOpening = false;
+    let introFinishTimer = null;
+    let introRemoveTimer = null;
+
+    function finishIntro() {
+        document.body.classList.remove('intro-active', 'intro-opening');
+        document.body.classList.add('intro-finished');
+        overlay.setAttribute('aria-hidden', 'true');
+
+        if (introRemoveTimer) {
+            window.clearTimeout(introRemoveTimer);
+        }
+
+        introRemoveTimer = window.setTimeout(() => {
+            if (overlay && overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
+        }, 900);
+    }
+
+    ball.addEventListener('click', () => {
+        if (isOpening) return;
+        isOpening = true;
+        document.body.classList.add('intro-opening');
+
+        if (introFinishTimer) {
+            window.clearTimeout(introFinishTimer);
+        }
+
+        introFinishTimer = window.setTimeout(() => {
+            finishIntro();
+        }, 2650);
+    });
+}
+
 function addKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
@@ -300,6 +353,8 @@ function addKeyboardShortcuts() {
 }
 
 function initPage() {
+    document.body.classList.remove('intro-opening', 'intro-finished');
+    setupIntroPortal();
     addLanguageSwitching();
     setupNavigation();
     setupScrollAnimation();

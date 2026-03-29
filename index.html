@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- 最后更新时间: 2025-06-28 12:46:33 -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+
+<body class="intro-active">
+    <div id="intro-overlay" class="intro-overlay" aria-hidden="false">
+        <div class="intro-white-flash"></div>
+        <div class="intro-scene">
+            <div class="digital-orbit orbit-one" aria-hidden="true"></div>
+            <div class="digital-orbit orbit-two" aria-hidden="true"></div>
+
+            <div class="digital-corners" aria-hidden="true">
+                <span class="corner tl"></span>
+                <span class="corner tr"></span>
+                <span class="corner bl"></span>
+                <span class="corner br"></span>
+            </div>
+
+            <div class="digital-particles" aria-hidden="true">
+                <span style="--x:14%; --y:22%; --d:0s;"></span>
+                <span style="--x:28%; --y:68%; --d:.7s;"></span>
+                <span style="--x:76%; --y:24%; --d:1.2s;"></span>
+                <span style="--x:84%; --y:62%; --d:.3s;"></span>
+                <span style="--x:48%; --y:16%; --d:1.6s;"></span>
+                <span style="--x:20%; --y:48%; --d:1.1s;"></span>
+                <span style="--x:70%; --y:78%; --d:.5s;"></span>
+                <span style="--x:56%; --y:84%; --d:1.8s;"></span>
+            </div>
+
+            <div class="intro-copy">
+                <p class="intro-kicker" data-en="DIGITAL EVOLUTION GATE" data-zh="数码进化之门">DIGITAL EVOLUTION GATE</p>
+                <p class="intro-hint" data-en="Click the ball to enter" data-zh="点击精灵球进入主页">Click the ball to enter</p>
+            </div>
+
+            <button id="portal-ball" class="portal-ball" type="button" aria-label="Enter homepage">
+                <span class="portal-ball-shell portal-ball-top"></span>
+                <span class="portal-ball-shell portal-ball-bottom"></span>
+                <span class="portal-ball-band"></span>
+                <span class="portal-ball-core"></span>
+                <span class="portal-ball-core-ring"></span>
+                <span class="portal-ball-highlight"></span>
+            </button>
+
+            <div class="intro-beams" aria-hidden="true">
+                <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span>
+                <span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span>
+                <span style="--i:8"></span><span style="--i:9"></span><span style="--i:10"></span><span style="--i:11"></span>
+                <span style="--i:12"></span><span style="--i:13"></span><span style="--i:14"></span><span style="--i:15"></span>
+            </div>
+        </div>
+    </div>
     <div class="stars"></div>
     <div class="twinkling"></div>
     <canvas id="code-rain" aria-hidden="true"></canvas>
@@ -25,6 +71,7 @@
     <div id="main" role="main">
         <!-- 左侧个人信息栏 -->
         <aside class="sidebar">
+            <div class="sidebar-stack">
             <div class="profile-box">
 
                 <div class="author-avatar">
@@ -48,6 +95,20 @@
                         <li><a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&user=GNv-lPoAAAAJ"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
                     </ul>
                 </div>
+            </div>
+
+            <section class="sidebar-updates-card">
+                <div class="sidebar-card-header">
+                    <h3 class="sidebar-card-title" data-en="Recent Updates" data-zh="最近更新">Recent Updates</h3>
+                    <span class="sidebar-card-tag" data-en="Latest" data-zh="最新">Latest</span>
+                </div>
+                <ul class="sidebar-updates-list">
+                    <li class="sidebar-update-item">
+                        <span class="sidebar-update-date">2025.04</span>
+                        <span class="sidebar-update-text" data-en="Admitted to Jilin University as a graduate student" data-zh="吉林大学考研拟录取">Admitted to Jilin University as a graduate student</span>
+                    </li>
+                </ul>
+            </section>
             </div>
         </aside>
 
@@ -153,11 +214,9 @@
                                     <p><strong data-en="Plant Disease Identification under Imbalanced Dataset using Hybrid Deep Learning Method" data-zh="Plant Disease Identification under Imbalanced Dataset using Hybrid Deep Learning Method">Plant Disease Identification under Imbalanced Dataset using Hybrid Deep Learning Method</strong></p>
                                     <p>DOI: <a href="https://doi.org/10.1007/s40030-024-00851-z">10.1007/s40030-024-00851-z</a></p>
                                 </div>
-                                <div class="paper-box-image">
-                                    <div class="badge">
-                                        <div class="badge-text">EI</div>
-                                        <div class="badge-year">2024</div>
-                                    </div>
+                                <div class="paper-meta">
+                                    <span class="meta-type" data-en="EI Journal" data-zh="EI 期刊">EI Journal</span>
+                                    <span class="meta-year">2024</span>
                                 </div>
                             </div>
 
@@ -166,11 +225,9 @@
                                     <p><strong data-en="Web Tampering Detection Based on DRAE and SVM Integration" data-zh="融合ＤＲＡＥ与ＳＶＭ的网页防篡改检测">Web Tampering Detection Based on DRAE and SVM Integration</strong></p>
                                     <p>DOI: <a href="https://doi.org/10.7631/issn.1000-2243.23334">10.7631/issn.1000-2243.23334</a></p>
                                 </div>
-                                <div class="paper-box-image">
-                                    <div class="badge">
-                                        <div class="badge-text" data-en="Core Journal" data-zh="核心期刊">Core Journal</div>
-                                        <div class="badge-year">2023</div>
-                                    </div>
+                                <div class="paper-meta">
+                                    <span class="meta-type" data-en="Core Journal" data-zh="核心期刊">Core Journal</span>
+                                    <span class="meta-year">2023</span>
                                 </div>
                             </div>
 
@@ -184,11 +241,9 @@
                                     <p><strong data-en="A Drug-Drug Interaction Prediction Method Based on RGDA-DDI" data-zh="一种基于RGDA-DDI的药物-药物相互作用预测方法">A Drug-Drug Interaction Prediction Method Based on RGDA-DDI</strong></p>
                                     <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2025.09.23</p>
                                 </div>
-                                <div class="paper-box-image">
-                                    <div class="badge">
-                                        <div class="badge-text" data-en="Invention Patent" data-zh="发明专利">Invention Patent</div>
-                                        <div class="badge-year">2025</div>
-                                    </div>
+                                <div class="paper-meta">
+                                    <span class="meta-type" data-en="Invention Patent" data-zh="发明专利">Invention Patent</span>
+                                    <span class="meta-year">2025</span>
                                 </div>
                             </div>
 
@@ -200,11 +255,9 @@
                                     <p><strong data-en="Multi-modal Machine Learning Based Web Tampering Detection Software" data-zh="基于多模态机器学习的网页防篡改检测软件">Multi-modal Machine Learning Based Web Tampering Detection Software</strong></p>
                                     <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2023.04.30</p>
                                 </div>
-                                <div class="paper-box-image">
-                                    <div class="badge">
-                                        <div class="badge-text" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</div>
-                                        <div class="badge-year">2023</div>
-                                    </div>
+                                <div class="paper-meta">
+                                    <span class="meta-type" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</span>
+                                    <span class="meta-year">2023</span>
                                 </div>
                             </div>
 
@@ -213,11 +266,9 @@
                                     <p><strong data-en="Deep Learning Based Drug-Drug Interaction Prediction System" data-zh="基于深度学习的药物-药物相互作用预测系统">Deep Learning Based Drug-Drug Interaction Prediction System</strong></p>
                                     <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2023.02.12</p>
                                 </div>
-                                <div class="paper-box-image">
-                                    <div class="badge">
-                                        <div class="badge-text" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</div>
-                                        <div class="badge-year">2023</div>
-                                    </div>
+                                <div class="paper-meta">
+                                    <span class="meta-type" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</span>
+                                    <span class="meta-year">2023</span>
                                 </div>
                             </div>
 
@@ -226,11 +277,9 @@
                                     <p><strong data-en="OpenCV Based Automatic Data Collection System" data-zh="基于OpenCV的数据自动采集系统">OpenCV Based Automatic Data Collection System</strong></p>
                                     <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2022.10.14</p>
                                 </div>
-                                <div class="paper-box-image">
-                                    <div class="badge">
-                                        <div class="badge-text" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</div>
-                                        <div class="badge-year">2022</div>
-                                    </div>
+                                <div class="paper-meta">
+                                    <span class="meta-type" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</span>
+                                    <span class="meta-year">2022</span>
                                 </div>
                             </div>
 
@@ -239,11 +288,9 @@
                                     <p><strong data-en="OpenCV Based Human Pose Estimation System" data-zh="基于OpenCV的人体姿态估计系统">OpenCV Based Human Pose Estimation System</strong></p>
                                     <p><span data-en="Approval Date" data-zh="获批日期">Approval Date</span>: 2022.10.10</p>
                                 </div>
-                                <div class="paper-box-image">
-                                    <div class="badge">
-                                        <div class="badge-text" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</div>
-                                        <div class="badge-year">2022</div>
-                                    </div>
+                                <div class="paper-meta">
+                                    <span class="meta-type" data-en="Software Copyright" data-zh="软件著作权">Software Copyright</span>
+                                    <span class="meta-year">2022</span>
                                 </div>
                             </div>
                         </div>
