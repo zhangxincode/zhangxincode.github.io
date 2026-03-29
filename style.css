@@ -641,19 +641,26 @@ body:not(.intro-opening) .portal-ball:hover::before {
     left: 50%;
     top: 50%;
     width: 4px;
-    height: 210px;
+    height: 120vmax;
     border-radius: 999px;
     transform-origin: 50% 100%;
     transform: translate(-50%, -100%) rotate(calc(var(--i) * 22.5deg)) translateY(-24px) scaleY(0.08);
     opacity: 0;
-    background: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,243,200,0.32) 18%, rgba(255,222,130,0.82) 54%, rgba(255,255,255,0.98) 100%);
-    box-shadow: 0 0 10px rgba(255,220,138,0.22), 0 0 22px rgba(255,255,255,0.18);
-    filter: blur(0.8px);
+    background: linear-gradient(
+        to top,
+        rgba(255,255,255,0) 0%,
+        rgba(255,243,200,0.18) 8%,
+        rgba(255,222,130,0.72) 18%,
+        rgba(255,255,255,0.98) 38%,
+        rgba(255,255,255,0.18) 100%
+    );
+    box-shadow: 0 0 16px rgba(255,220,138,0.28), 0 0 36px rgba(255,255,255,0.22);
+    filter: blur(1px);
     transition: opacity .22s ease, transform .42s cubic-bezier(.2,.9,.2,1.1), box-shadow .35s ease;
 }
 body:not(.intro-opening) .intro-scene:has(.portal-ball:hover) .intro-beams span {
     opacity: 1;
-    transform: translate(-50%, -100%) rotate(calc(var(--i) * 22.5deg)) translateY(-42px) scaleY(1);
+    transform: translate(-50%, -100%) rotate(calc(var(--i) * 22.5deg)) translateY(-42px) scaleY(1.1);
     animation: hoverBeamPulse 1.15s ease-in-out infinite;
 }
 body:not(.intro-opening) .intro-scene:has(.portal-ball:hover) .intro-beams span:nth-child(odd) { animation-delay: .08s; }
@@ -789,5 +796,5 @@ body.intro-finished .intro-overlay {
     .portal-ball { width: min(74vw, 360px); }
     .portal-ball-core-ring { width: 104px; height: 104px; margin-top: -52px; }
     .portal-ball-core { width: 60px; height: 60px; margin-top: -30px; }
-    .intro-beams span { height: min(56vw, 290px); }
+    .intro-beams span { height: 120vmax; }
 }
