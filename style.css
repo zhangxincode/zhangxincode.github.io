@@ -339,14 +339,16 @@ a { text-decoration: none; }
 body.intro-active { overflow: hidden; }
 
 .intro-overlay {
+    --intro-center-x: 50%;
+    --intro-center-y: 50%;
     position: fixed;
     inset: 0;
     z-index: 5000;
     display: grid;
     place-items: center;
     background:
-        radial-gradient(circle at 50% 42%, rgba(255, 90, 90, 0.16), transparent 18%),
-        radial-gradient(circle at 50% 54%, rgba(255,255,255,0.10), transparent 16%),
+        radial-gradient(circle at var(--intro-center-x) var(--intro-center-y), rgba(255, 90, 90, 0.16), transparent 18%),
+        radial-gradient(circle at var(--intro-center-x) var(--intro-center-y), rgba(255,255,255,0.10), transparent 16%),
         linear-gradient(180deg, rgba(10, 14, 26, 0.98) 0%, rgba(18, 22, 40, 0.98) 100%);
     overflow: hidden;
     transition: opacity .8s ease, visibility .8s ease;
@@ -356,7 +358,7 @@ body.intro-active { overflow: hidden; }
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10), transparent 22%),
+        radial-gradient(circle at var(--intro-center-x) var(--intro-center-y), rgba(255,255,255,0.10), transparent 22%),
         linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
     background-size: auto, 32px 32px, 32px 32px;
@@ -365,7 +367,7 @@ body.intro-active { overflow: hidden; }
 .intro-white-flash {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 26%, rgba(255,255,255,.28) 52%, rgba(255,255,255,0) 76%);
+    background: radial-gradient(circle at var(--intro-center-x) var(--intro-center-y), rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 26%, rgba(255,255,255,.28) 52%, rgba(255,255,255,0) 76%);
     opacity: 0;
     transform: scale(.45);
     transition: opacity .2s linear, transform 1.8s cubic-bezier(.16,.84,.26,1);
@@ -427,8 +429,8 @@ body.intro-active { overflow: hidden; }
 /* ===== 数码环与HUD元素 ===== */
 .digital-orbit {
     position: absolute;
-    left: 50%;
-    top: 54%;
+    left: var(--intro-center-x);
+    top: var(--intro-center-y);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -638,8 +640,8 @@ body:not(.intro-opening) .portal-ball:hover::before {
 }
 .intro-beams span {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: var(--intro-center-x);
+    top: var(--intro-center-y);
     width: 4px;
     height: 120vmax;
     border-radius: 999px;
