@@ -117,9 +117,9 @@ function buildTerminalSequence() {
         { type: 'command-typed', text: 'whoami' },
         { type: 'output', text: lang === 'zh' ? '张鑫 · 人工智能研究生 · 图学习 / LLM 研究者' : 'Xin Zhang · AI Graduate Student · Graph / LLM Researcher' },
         { type: 'command-typed', text: 'cat focus.txt' },
-        { type: 'output', text: lang === 'zh' ? '聚焦图学习、多智能体系统与 FairLLM，探索更可靠的 AI 系统。' : 'Building reliable AI systems with graph learning, multi-agent systems, and FairLLM exploration.' },
+        { type: 'output', text: lang === 'zh' ? '聚焦公平图模型、扩散语言模型与大语言模型幻觉研究。' : 'Researching Fair Graph Models, Diffusion Language Models, and LLM Hallucination.' },
         { type: 'command-typed', text: 'ls skills/' },
-        { type: 'output', text: 'graph_ml/  mas/  llm_systems/  fairness/' }
+        { type: 'output', text: 'Graph_Model/ Diffusion_Language_Model/' }
     ];
 }
 
